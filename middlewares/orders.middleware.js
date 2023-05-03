@@ -3,16 +3,18 @@ const catchAsync = require('../helpers/catchAsync');
 const AppError = require('../helpers/appError');
 
 exports.validIfExistOrder = catchAsync(async (req, res, next) => {
+ 
   const { id } = req.params;
-
+  const {sessionUser} = req
   const order = await Order.findOne({
     where: {
-      id,
+      id, 
+      userId: sessionUser.id
     },
   });
 
   if (!order) {
-    return next(new AppError(`Order id: ${id} not found`, 404));
+    return next(new AppError(`The order with id: ${id} does not exist or does not belong to you`, 404));
   }
 
   if (order.status !== 'active') {

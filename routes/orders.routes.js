@@ -20,7 +20,9 @@ router.get('/me', findAllOrderUser);
 
 router
   .route('/:id')
-  .patch(validOrder.validIfExistOrder, updateOrder)
+  .patch(
+    validOrder.validIfExistOrder,
+     updateOrder)
   .delete(validOrder.validIfExistOrder, deleteOrder);
 
 module.exports = router;
