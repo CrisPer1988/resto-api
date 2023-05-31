@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const cors = require("cors")
 
 const AppError = require('./helpers/appError');
 const globalErrorHandler = require('./controller/error.controller');
@@ -16,6 +17,7 @@ const mealsRoutes = require('./routes/meals.routes');
 const ordersRoutes = require('./routes/orders.routes');
 
 app.use(express.json());
+app.use(cors());
 
 app.use('/api/v1/users', usersRoutes);
 app.use('/api/v1/restaurants', restaurantsRoutes);
